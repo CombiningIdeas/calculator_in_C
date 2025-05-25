@@ -1,0 +1,89 @@
+<!-- … весь прежний код сайта выше остаётся без изменений -->
+
+<!-- вставка блока рекламы -->
+<div id="ad-overlay">
+    🔥🔥 Здесь могла бы быть ваша реклама. Но её никто не заказал, поэтому сайт написан на коленке. Приятного калькулирования! 🔥🔥<br>
+    <button id="close-btn" onclick="hideAd()">Закрыть</button>
+</div>
+  
+<!-- стили CSS -->
+<style>
+    #ad-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white;
+        font-size: 24px;
+        text-align: center;
+        padding-top: 20%;
+        z-index: 10000;
+    }
+    
+    #close-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        display: none;
+    }
+</style>
+  
+<!-- код на JS -->
+<script>
+    /* здесь вставляем содержимое script.js: */
+    const explodingTextElement = document.getElementById('exploding-text');
+    const explodingTextContent = explodingTextElement.textContent.trim();
+    explodingTextElement.innerHTML = '';
+    explodingTextContent.split('').forEach((char, index) => {
+        const span = document.createElement('span');
+        span.textContent = char;
+        span.setAttribute('data-char', char);
+        span.classList.add('letter');
+        const angle = Math.random() * 2.5 * Math.PI;
+        const radius = Math.max(window.innerWidth, window.innerHeight);
+        const x = Math.cos(angle) * radius + 'px';
+        const y = Math.sin(angle) * radius + 'px';
+        const rotate = Math.floor(Math.random() * 720 - 360) + 'deg';
+        span.style.setProperty('--x', x);
+        span.style.setProperty('--y', y);
+        span.style.setProperty('--r', rotate);
+        span.style.animationDelay = `${index * 0.08}s`;
+        explodingTextElement.appendChild(span);
+    });
+    
+    // === Сама реклама ===
+    let closeTimeout, autoCloseTimeout;
+    
+    function showAd() {
+        const overlay = document.getElementById("ad-overlay");
+        const closeBtn = document.getElementById("close-btn");
+    
+        overlay.style.display = "block";
+        closeBtn.style.display = "none";
+    
+        closeTimeout = setTimeout(() => {
+        closeBtn.style.display = "inline-block";
+        }, 3000);
+    
+        autoCloseTimeout = setTimeout(() => {
+        hideAd();
+        }, 6000);
+    }
+    
+    function hideAd() {
+        const overlay = document.getElementById("ad-overlay");
+        const closeBtn = document.getElementById("close-btn");
+    
+        overlay.style.display = "none";
+        closeBtn.style.display = "none";
+    
+        clearTimeout(closeTimeout);
+        clearTimeout(autoCloseTimeout);
+    }
+    
+    showAd(); // показать сразу
+    setInterval(showAd, 20000); // каждые 20 секунд
+</script>
+  

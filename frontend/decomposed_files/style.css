@@ -1,0 +1,201 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #ff00ff; /* яркий неон-розовый для текста */
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; /* неоновый эффект */
+
+    /* Градиентный фон */
+    /*background: linear-gradient(135deg, #3006d7, #6005c1, #ae12d9, #eb0ce4);#000000, #3006d7, */
+    background: linear-gradient(135deg,  #6005c1, #ae12d9, #eb0ce4);
+    background-size: 200% 200%;
+
+    /* Одновременное использование двух анимаций переливания текста и фона*/
+    animation: textGlow 5s ease-in-out infinite alternate, gradientShift 15s ease infinite; 
+}
+
+/* Анимация для плавного изменения яркости текста */
+@keyframes textGlow {
+    0% {
+        color: #ff00ff;
+        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    }
+    50% {
+        color: #00ff00; /* зелёный для контраста */
+        text-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
+    }
+    100% {
+        color: #ff00ff;
+        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    }
+}
+
+/* Анимация для плавного перелива фона */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+    
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* класс для слова "Калькулятор*/
+.glow-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    font-size: 4rem;
+    color: white;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+/* Отдельная буква */
+.letter {
+    display: inline-block;
+    position: relative;
+    animation: explodeAndReturn 6s ease-in-out infinite;
+}
+
+/* Анимация: разлет → возврат → пауза */
+@keyframes explodeAndReturn {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    20% {
+        transform: translate(var(--x), var(--y)) rotate(var(--r));
+        opacity: 0.6;
+    }
+    40% {
+        transform: translate(var(--x), var(--y)) rotate(var(--r));
+        opacity: 0.6;
+    }
+    60% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+
+/* Стиль для всех вводов и кнопок */
+input, button {
+    width: 100%;                 /* Устанавливаем ширину на 100% от родительского контейнера */
+    padding: 15px;               /* Увеличиваем отступы для более крупных элементов */
+    margin: 20px 0;              /* Отступы между элементами */
+    border-radius: 8px;          /* Скругляет углы поля для более приятного визуального восприятия.*/
+    font-size: 1rem;             /* Увеличиваем размер шрифта */
+
+    background: linear-gradient(90deg, #4b0082,#a106e8, #ff1493); /* это фон формы*/
+    
+    color: #ffffff;            /* цвет текста внутри формы */
+    border: 2px solid #000000; /* Используется для задания границы элемента*/
+
+
+    /* <input> и <button> хоть и имеют одинаковую ширину width: 100%, но они по-разному обрабатывают 
+    внутренние отступы (padding) и границы (border).Это влияет на то, как браузер считает ширину. 
+    И, несмотря на width: 120%, итоговая "визуальная" ширина может отличаться. 
+    Поэтому нам нужно CSS-свойство: */
+    box-sizing: border-box;   /* Это свойство заставляет браузер учитывать padding и border в пределах width, 
+    а не добавлять их к ширине.*/
+}
+
+/* Кнопка с фоном и белым текстом */
+button {
+    background: linear-gradient( /*это фон кнопки, до наведения курсора*/
+        90deg,
+        #4b0082 0%,
+        #4b0082 33.33%,
+        #a106e8 33.34%,
+        #a106e8 66.66%,
+        #ff1493 66.67%,
+        #ff1493 100%
+    );        
+    background-size: 300% 100%;
+    
+    border: #d708de;                /* Убираем границу, чтобы она не перекрывала общий стиль */
+    border-radius: 50px;         /* Скругляем углы кнопки */
+    color: white;                /* Белый цвет текста */
+    cursor: pointer;             /* Курсор при наведении */
+    font-weight: bold;           /* Жирный шрифт */
+    transition: background-color 0.35s; /* Эффект плавного перехода при наведении */
+}
+
+/* задаёт изменение фона кнопки при наведении курсора мыши.*/
+button:hover {
+    background: linear-gradient( /*deg - это угол направления градиента*/
+        90deg,
+        #0adbea 0%,
+        #e90b88 33.33%,
+        #8305be 33.34%,
+        #8305be 66.66%,
+        #e654a2 66.67%,
+        #e654a2 100%
+    );
+    background-size: 300% 100%;
+
+    color: white;
+    border: 2px solid #111104; 
+}
+
+/* Стили для ширины и выравнивания */
+.full-width {
+    width: 100%;        /* Устанавливает ширину элемента в 100% от ширины его родительского контейнера*/
+    max-width: 700px;   /* Максимальная ширина (можно настроить) */
+    margin: auto;       /* Центрируем элементы по вертикали */
+}
+
+
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background: url("https://raw.githubusercontent.com/rodrigograca31/rodrigograca31/master/matrix.svg") no-repeat center center;
+    background-size: cover;
+    opacity: 0.7; /* регулируй уровень прозрачности */
+    
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Это id для тэга внутри которого наша кнопка, поэтому сама кнопка визуально не измениться*/
+/* Этот id нужен для того, чтобы наша кнопка была ниже других*/
+#fixed-bottom-form {
+    margin-top: 200px;   /* расстояние между предыдущим полем и этой кнопкой */
+}
+
+
+/* При наведении смещаем градиент */
+#fixed-bottom-form .full-width:hover {
+    background: linear-gradient( /*deg - это угол направления градиента*/
+        90deg,
+        #e1e811 0%,
+        #0db82c 33.33%,
+        #a21be1 33.34%,
+        #a21be1 66.66%,
+        #e654a2 66.67%,
+        #e654a2 100%
+    );
+    background-size: 300% 100%;
+    
+    color: white;
+    border: 2px solid #a2ef1e; 
+}
