@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Калькулятор</title>
+    <style>
+        /* здесь вставляем содержимое style.css: */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; 
+            background: linear-gradient(135deg,  #6005c1, #ae12d9, #eb0ce4);
+            background-size: 200% 200%;
+            animation: textGlow 5s ease-in-out infinite alternate, gradientShift 15s ease infinite; 
+        }
+        
+        @keyframes textGlow {
+            0% {
+                color: #ff00ff;
+                text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            }
+            50% {
+                color: #00ff00;
+                text-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
+            }
+            100% {
+                color: #ff00ff;
+                text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+            
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .glow-header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 4rem;
+            color: white;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+
+        .letter {
+            display: inline-block;
+            position: relative;
+            animation: explodeAndReturn 6s ease-in-out infinite;
+        }
+
+        @keyframes explodeAndReturn {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+            20% {
+                transform: translate(var(--x), var(--y)) rotate(var(--r));
+                opacity: 0.6;
+            }
+            40% {
+                transform: translate(var(--x), var(--y)) rotate(var(--r));
+                opacity: 0.6;
+            }
+            60% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        input, button {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1rem;             
+            background: linear-gradient(90deg, #4b0082,#a106e8, #ff1493);
+            color: #ffffff;
+            border: 2px solid #000000;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: linear-gradient(
+                90deg,
+                #4b0082 0%,
+                #4b0082 33.33%,
+                #a106e8 33.34%,
+                #a106e8 66.66%,
+                #ff1493 66.67%,
+                #ff1493 100%
+            );        
+            background-size: 300% 100%;
+            border: #d708de;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.35s;
+        }
+
+        button:hover {
+            background: linear-gradient(
+                90deg,
+                #0adbea 0%,
+                #e90b88 33.33%,
+                #8305be 33.34%,
+                #8305be 66.66%,
+                #e654a2 66.67%,
+                #e654a2 100%
+            );
+            background-size: 300% 100%;
+
+            color: white;
+            border: 2px solid #111104; 
+        }
+
+        .full-width {
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url("https://raw.githubusercontent.com/rodrigograca31/rodrigograca31/master/matrix.svg") no-repeat center center;
+            background-size: cover;
+            opacity: 0.7;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #fixed-bottom-form {
+            margin-top: 200px;
+        }
+
+
+        #fixed-bottom-form .full-width:hover {
+            background: linear-gradient(
+                90deg,
+                #e1e811 0%,
+                #0db82c 33.33%,
+                #a21be1 33.34%,
+                #a21be1 66.66%,
+                #e654a2 66.67%,
+                #e654a2 100%
+            );
+            background-size: 300% 100%;
+            color: white;
+            border: 2px solid #a2ef1e; 
+        }
+        
+    </style>
+</head>
+<body>
+<div class="calculator">
+
+    <h1 id="exploding-text" class="glow-header">
+        Калькулятор
+    </h1>
+
+    <form id="calculator-form" action="http://127.0.0.1:7979/api/post" method="POST">
+
+        <div class="input-row">
+            <input type="text" name="expression" placeholder="Введите выражениеe, например: 3*(5+5)-4/2" value="%s" required>
+        </div>
+
+        <div class="input-row">
+            <button type="submit" class="full-width">Вычислить</button>
+        </div>
+    </form>
+    
+    <div class="input-row">
+        <input type="text" id="result-field" placeholder="Результат появится здесь" value="%s" readonly>
+    </div>
+
+    <form id="fixed-bottom-form" action="http://127.0.0.1:7979/api/get" method="GET">
+        <div class="input-row">
+            <button type="submit" class="full-width">Получить данные</button>
+        </div>
+    </form>
+</div>
+
+
+    <script>
+        /* здесь вставляем содержимое script.js: */
+        const textElement = document.getElementById('exploding-text');
+        const textContent = textElement.textContent.trim();
+        textElement.innerHTML = '';
+        textContent.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.setAttribute('data-char', char);
+            span.classList.add('letter');
+            const angle = Math.random() * 2.5 * Math.PI;
+            const radius = Math.max(window.innerWidth, window.innerHeight);
+            const x = Math.cos(angle) * radius + 'px';
+            const y = Math.sin(angle) * radius + 'px';
+            const rotate = Math.floor(Math.random() * 720 - 360) + 'deg';
+            span.style.setProperty('--x', x);
+            span.style.setProperty('--y', y);
+            span.style.setProperty('--r', rotate);
+            span.style.animationDelay = `${index * 0.08}s`;
+            textElement.appendChild(span);
+        });
+    </script>
+
+</body>
+</html>
