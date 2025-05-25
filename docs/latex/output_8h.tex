@@ -1,0 +1,105 @@
+\doxysection{backend/src/output/output.h File Reference}
+\hypertarget{output_8h}{}\label{output_8h}\index{backend/src/output/output.h@{backend/src/output/output.h}}
+
+
+Заголовочный файл для обработки GET и POST HTTP-\/запросов сервера.  
+
+
+{\ttfamily \#include "{}../../../mongoose/mongoose.\+h"{}}\newline
+Include dependency graph for output.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{output_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{output_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{output_8h_ac2dc442cf891a70da9743899a1c3fa6b}{handle\+\_\+get\+\_\+request}} (struct mg\+\_\+connection \texorpdfstring{$\ast$}{*}c)
+\begin{DoxyCompactList}\small\item\em Обработка GET-\/запроса к серверу. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{output_8h_a631f283b1bfb4a3e77c7a5ab7962fed0}{handle\+\_\+post\+\_\+request}} (struct mg\+\_\+connection \texorpdfstring{$\ast$}{*}c, struct mg\+\_\+http\+\_\+message \texorpdfstring{$\ast$}{*}hm)
+\begin{DoxyCompactList}\small\item\em Обработка POST-\/запроса, получение и вычисление выражения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Заголовочный файл для обработки GET и POST HTTP-\/запросов сервера. 
+
+Содержит объявления функций\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{output_8h_ac2dc442cf891a70da9743899a1c3fa6b}{handle\+\_\+get\+\_\+request()}} — для обработки GET-\/запросов и отправки JSON-\/ответа с текущей датой и конфигурацией.
+\item {\ttfamily \doxylink{output_8h_a631f283b1bfb4a3e77c7a5ab7962fed0}{handle\+\_\+post\+\_\+request()}} — для обработки POST-\/запросов, выполнения вычислений и генерации HTML-\/ответа.
+\end{DoxyItemize}
+
+Эти функции используются в HTTP-\/обработчике {\ttfamily ev\+\_\+handler()} и обеспечивают взаимодействие сервера с пользователем.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{output_8c}{output.\+c} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{output_8h_ac2dc442cf891a70da9743899a1c3fa6b}\label{output_8h_ac2dc442cf891a70da9743899a1c3fa6b} 
+\index{output.h@{output.h}!handle\_get\_request@{handle\_get\_request}}
+\index{handle\_get\_request@{handle\_get\_request}!output.h@{output.h}}
+\doxysubsubsection{\texorpdfstring{handle\_get\_request()}{handle\_get\_request()}}
+{\footnotesize\ttfamily void handle\+\_\+get\+\_\+request (\begin{DoxyParamCaption}\item[{struct mg\+\_\+connection \texorpdfstring{$\ast$}{*}}]{c }\end{DoxyParamCaption})}
+
+
+
+Обработка GET-\/запроса к серверу. 
+
+Функция генерирует JSON-\/ответ, содержащий\+:
+\begin{DoxyItemize}
+\item Статус и сообщение об успешной обработке.
+\item Текущую дату и время.
+\item Версию, автора и параметры конфигурации.
+\end{DoxyItemize}
+
+Используется структура {\ttfamily mg\+\_\+connection} из библиотеки Mongoose для отправки ответа клиенту.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Указатель на соединение Mongoose, по которому пришёл запрос.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Используется при обращении к {\ttfamily /api/get}. 
+\end{DoxyNote}
+\Hypertarget{output_8h_a631f283b1bfb4a3e77c7a5ab7962fed0}\label{output_8h_a631f283b1bfb4a3e77c7a5ab7962fed0} 
+\index{output.h@{output.h}!handle\_post\_request@{handle\_post\_request}}
+\index{handle\_post\_request@{handle\_post\_request}!output.h@{output.h}}
+\doxysubsubsection{\texorpdfstring{handle\_post\_request()}{handle\_post\_request()}}
+{\footnotesize\ttfamily void handle\+\_\+post\+\_\+request (\begin{DoxyParamCaption}\item[{struct mg\+\_\+connection \texorpdfstring{$\ast$}{*}}]{c,  }\item[{struct mg\+\_\+http\+\_\+message \texorpdfstring{$\ast$}{*}}]{hm }\end{DoxyParamCaption})}
+
+
+
+Обработка POST-\/запроса, получение и вычисление выражения. 
+
+
+\begin{DoxyItemize}
+\item Извлекает выражение из POST-\/запроса (например, {\ttfamily "{}2+2\texorpdfstring{$\ast$}{*}3"{}}).
+\item Вычисляет результат с помощью {\ttfamily \doxylink{calculator_8c_a9c963211521f085da15c5f9a3997fb6a}{calculate()}} из модуля {\ttfamily \doxylink{calculator_8h}{calculator.\+h}}.
+\item Подставляет выражение и результат в HTML-\/шаблон {\ttfamily Output\+Page.\+html}.
+\item Отправляет получившийся HTML обратно клиенту.
+\end{DoxyItemize}
+
+В случае ошибки загрузки шаблона возвращается HTTP-\/статус 500.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Указатель на соединение Mongoose. \\
+\hline
+{\em hm} & Указатель на структуру {\ttfamily mg\+\_\+http\+\_\+message}, содержащую данные HTTP-\/запроса.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Используется при обращении к {\ttfamily /api/post}. 
+\end{DoxyNote}

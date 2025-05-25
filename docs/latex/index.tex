@@ -1,0 +1,173 @@
+\chapter{Calculator in C}
+\hypertarget{index}{}\label{index}\index{Calculator in C@{Calculator in C}}
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+ \hypertarget{index_autotoc_md3}{}\doxysubsection{\texorpdfstring{Проект представляет собой веб-\/калькулятор, реализованный на языке C с использованием библиотеки $<$a href="{}https\+://github.\+com/cesanta/mongoose"{} $>$\+Mongoose$<$/a$>$ для запуска веб-\/сервера. Интерфейс написан на HTML. Серверная часть выполняет вычисления, обрабатывая POST  и GET запросы от клиента. $<$br/$>$}{Проект представляет собой веб-калькулятор, реализованный на языке C с использованием библиотеки <a href="https://github.com/cesanta/mongoose" >Mongoose</a> для запуска веб-сервера. Интерфейс написан на HTML. Серверная часть выполняет вычисления, обрабатывая POST  и GET запросы от клиента. <br/>}}\label{index_autotoc_md3}
+\hypertarget{index_autotoc_md4}{}\doxysubsection{\texorpdfstring{Ссылка на полную документацию в проекта через средства автоматизации генерации документации на основе исходных текстов программ -\/ Doxygen\+: @ref "{}/home/deadcode/\+User\+Folder/\+D/educational projects/\+OP/laboratory work/laboratory\+\_\+work\+\_\+3/calculator\+\_\+in\+\_\+\+C/docs/docs.\+md"{} "{}Документация"{}}{Ссылка на полную документацию в проекта через средства автоматизации генерации документации на основе исходных текстов программ - Doxygen: @ref "/home/deadcode/UserFolder/D/educational projects/OP/laboratory work/laboratory\_work\_3/calculator\_in\_C/docs/docs.md" "Документация"}}\label{index_autotoc_md4}
+\DoxyHorRuler{0}
+
+
+
+\begin{DoxyItemize}
+\item 📁 Структура проекта
+\item ⚙️ Сборка проекта
+\item 🚀 Запуск сервера
+\item 💡 Дополнительно
+\item 🔧 Зависимости
+\item 📌 Автор
+\item 📄 Лицензия
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md7}{}\doxysection{\texorpdfstring{📁 Структура проекта}{📁 Структура проекта}}\label{index_autotoc_md7}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/Calculator\_in\_C}
+\DoxyCodeLine{│──\ backend}
+\DoxyCodeLine{│\ \ \ │──\ build/\ }
+\DoxyCodeLine{│\ \ \ │\ \ \ │──\ package/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │──\ main}
+\DoxyCodeLine{│\ \ \ │──\ src/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │──\ calculator/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │──\ calculator.c}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │──\ calculator.h}
+\DoxyCodeLine{│\ \ \ │\ \ \ │──\ output/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │──\ output.c}
+\DoxyCodeLine{│\ \ \ │\ \ \ │\ \ \ │──\ output.h}
+\DoxyCodeLine{│\ \ \ │\ \ \ │──\ main.c}
+\DoxyCodeLine{│\ \ \ │\ \ \ │──\ main.h\ \ }
+\DoxyCodeLine{│──\ docs/}
+\DoxyCodeLine{│\ \ \ │──\ ...}
+\DoxyCodeLine{│──\ frontend/}
+\DoxyCodeLine{│\ \ \ │──\ decomposed\_files/}
+\DoxyCodeLine{│\ \ \ │\ \ \ │──\ index.html}
+\DoxyCodeLine{│\ \ \ │\ \ \ │──\ style.css}
+\DoxyCodeLine{│\ \ \ │\ \ \ │──\ script.js}
+\DoxyCodeLine{│\ \ \ │──\ MainPage.html}
+\DoxyCodeLine{│\ \ \ │──\ OutputPage.html}
+\DoxyCodeLine{├──\ mongoose/}
+\DoxyCodeLine{│\ \ \ │──\ mogoose.c}
+\DoxyCodeLine{│\ \ \ │──\ mogoose.h}
+\DoxyCodeLine{│\ \ \ │──\ LICENSE}
+\DoxyCodeLine{│\ \ \ │──\ README.md}
+\DoxyCodeLine{│\ \ \ │──\ ...}
+\DoxyCodeLine{│──\ .gitignore}
+\DoxyCodeLine{│──\ Makefile}
+\DoxyCodeLine{│──\ LICENSE.md}
+\DoxyCodeLine{│──\ README.md}
+\DoxyCodeLine{│──\ Doxygen}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{index_autotoc_md9}{}\doxysection{\texorpdfstring{⚙️ Сборка проекта}{⚙️ Сборка проекта}}\label{index_autotoc_md9}
+Для сборки сервера\+:\hypertarget{index_autotoc_md10}{}\doxysubsection{\texorpdfstring{🔨 1. Сборка с помощью make}{🔨 1. Сборка с помощью make}}\label{index_autotoc_md10}
+Проект поддерживает автоматическую сборку через Makefile. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+
+\end{DoxyCode}
+
+
+Эта команда\+:
+
+
+\begin{DoxyItemize}
+\item скомпилирует .c-\/файлы в .o-\/файлы;
+\item соберёт исполняемый файл main по пути\+: backend/build/package/main
+\end{DoxyItemize}
+
+Можно собрать напрямую в консоли указывая все файлы\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gcc\ backend/src/main.c\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ backend/src/output/output.c\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ backend/src/calculator/calculator.c\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ mongoose/mongoose.c\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ -\/o\ backend/build/package/main}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md11}{}\doxysubsection{\texorpdfstring{🧹 2. Очистка проекта}{🧹 2. Очистка проекта}}\label{index_autotoc_md11}
+Для удаления всех объектных файлов\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ clean}
+
+\end{DoxyCode}
+
+
+Для полной очистки (включая финальный main)\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ all-\/clean}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md12}{}\doxysubsection{\texorpdfstring{🔁 3. Перекомпиляция}{🔁 3. Перекомпиляция}}\label{index_autotoc_md12}
+Для удаления старого main и повторной сборки\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ rebuild}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md13}{}\doxysection{\texorpdfstring{🚀 Запуск сервера}{🚀 Запуск сервера}}\label{index_autotoc_md13}
+Можно такой командой\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./backend/build/package/main}
+
+\end{DoxyCode}
+
+
+Или такой командой\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{backend/build/package/main}
+
+\end{DoxyCode}
+
+
+После запуска сервер будет доступен по адресу\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{http://localhost:7979}
+\DoxyCodeLine{или}
+\DoxyCodeLine{http://127.0.0.1:7979}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md14}{}\doxysection{\texorpdfstring{💡 Дополнительно}{💡 Дополнительно}}\label{index_autotoc_md14}
+
+\begin{DoxyItemize}
+\item Серверная часть обрабатывает математические выражения, переданные из формы на index.\+html, и возвращает результат пользователю.
+\item Используется HTML-\/форма для отправки запроса, Java\+Script и CSS отсутствуют в основной логике вычислений.
+\item Расширенная документация может быть сгенерирована с помощью Doxygen из backend/\+Doxygen/.
+\item Использование автоматичской документации проекта на основе исходного кода через Doxygen\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{doxygen\ -\/g\ Doxyfile}
+
+\end{DoxyCode}
+ Подробное описание настроек Doxygen-\/файла для проекта есть в другом моем github проекте\+: ~\newline
+ \href{https://github.com/CombiningIdeas/Doxygen-Documentation}{\texttt{ }} ~\newline
+ Для отключения документирования папки mongoose в файле Doxygen мы написали в одном флаге следующее значение\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{EXCLUDE\ =\ mongoose/}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_autotoc_md15}{}\doxysection{\texorpdfstring{🔧 Зависимости}{🔧 Зависимости}}\label{index_autotoc_md15}
+
+\begin{DoxyItemize}
+\item Компилятор gcc
+\item Библиотека mongoose.\+c (в папке mongoose/)
+\end{DoxyItemize}\hypertarget{index_autotoc_md16}{}\doxysection{\texorpdfstring{📌 Автор}{📌 Автор}}\label{index_autotoc_md16}
+
+\begin{DoxyItemize}
+\item Этот проект был разработан в учебных целях Иваном Широких.
+\end{DoxyItemize}\hypertarget{index_autotoc_md17}{}\doxysection{\texorpdfstring{📄 Лицензия}{📄 Лицензия}}\label{index_autotoc_md17}
+Этот проект распространяется под лицензией {\bfseries{GNU General Public License v2.\+0}}.
+
+Вы можете свободно использовать, изменять и распространять данный код, при условии соблюдения условий GPL. Проект предоставляется "{}как есть"{}, без каких-\/либо гарантий.
+
+Текст лицензии доступен в файле \doxysectlink{md_LICENSE}{\`{}\+LICENSE.md\`{}}{0} или по ссылке\+: ~\newline
+ \href{http://www.gnu.org/licenses/old-licenses/gpl-2.0.html}{\texttt{ http\+://www.\+gnu.\+org/licenses/old-\/licenses/gpl-\/2.\+0.\+html}} 

@@ -1,0 +1,50 @@
+\doxysection{backend/include/config.c File Reference}
+\hypertarget{config_8c}{}\label{config_8c}\index{backend/include/config.c@{backend/include/config.c}}
+
+
+Конфигурационные параметры проекта.  
+
+
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{config_8c__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{config_8c_addea25ceb251c4cb868074132a0e5adc}{LENGTH\+\_\+\+OF\+\_\+\+FORMS\+\_\+\+RESPONSE\+\_\+\+AND\+\_\+\+REQUEST}} = 512
+\begin{DoxyCompactList}\small\item\em Максимальная длина строки, передаваемой через HTML-\/форму. \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{config_8c_ae9318ee511443116d210afe23037a5b3}{LENGTH\+\_\+\+OF\+\_\+\+FINAL\+\_\+\+HTML\+\_\+\+PAGE\+\_\+\+IN\+\_\+\+BITES}} = 8192
+\begin{DoxyCompactList}\small\item\em Максимальный размер итоговой HTML-\/страницы (в битах). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Конфигурационные параметры проекта. 
+
+Содержит глобальные константы, определяющие размеры буферов 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{config_8c_ae9318ee511443116d210afe23037a5b3}\label{config_8c_ae9318ee511443116d210afe23037a5b3} 
+\index{config.c@{config.c}!LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES@{LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES}}
+\index{LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES@{LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES}!config.c@{config.c}}
+\doxysubsubsection{\texorpdfstring{LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES}{LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES}}
+{\footnotesize\ttfamily const int LENGTH\+\_\+\+OF\+\_\+\+FINAL\+\_\+\+HTML\+\_\+\+PAGE\+\_\+\+IN\+\_\+\+BITES = 8192}
+
+
+
+Максимальный размер итоговой HTML-\/страницы (в битах). 
+
+Используется в буфере {\ttfamily final\+\_\+html} при генерации HTML-\/ответа пользователю. \Hypertarget{config_8c_addea25ceb251c4cb868074132a0e5adc}\label{config_8c_addea25ceb251c4cb868074132a0e5adc} 
+\index{config.c@{config.c}!LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST@{LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST}}
+\index{LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST@{LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST}!config.c@{config.c}}
+\doxysubsubsection{\texorpdfstring{LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST}{LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST}}
+{\footnotesize\ttfamily const int LENGTH\+\_\+\+OF\+\_\+\+FORMS\+\_\+\+RESPONSE\+\_\+\+AND\+\_\+\+REQUEST = 512}
+
+
+
+Максимальная длина строки, передаваемой через HTML-\/форму. 
+
+Используется для хранения выражения пользователя и результата вычисления в функциях обработки POST-\/запроса. 

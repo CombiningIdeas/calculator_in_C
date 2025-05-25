@@ -1,0 +1,80 @@
+\doxysection{backend/src/output/output.c File Reference}
+\hypertarget{output_8c}{}\label{output_8c}\index{backend/src/output/output.c@{backend/src/output/output.c}}
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include "{}output.\+h"{}}\newline
+{\ttfamily \#include "{}../calculator/calculator.\+h"{}}\newline
+{\ttfamily \#include "{}../../include/config.\+c"{}}\newline
+Include dependency graph for output.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{output_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{output_8c_ac2dc442cf891a70da9743899a1c3fa6b}{handle\+\_\+get\+\_\+request}} (struct mg\+\_\+connection \texorpdfstring{$\ast$}{*}c)
+\begin{DoxyCompactList}\small\item\em Обработка GET-\/запроса к серверу. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{output_8c_a631f283b1bfb4a3e77c7a5ab7962fed0}{handle\+\_\+post\+\_\+request}} (struct mg\+\_\+connection \texorpdfstring{$\ast$}{*}c, struct mg\+\_\+http\+\_\+message \texorpdfstring{$\ast$}{*}hm)
+\begin{DoxyCompactList}\small\item\em Обработка POST-\/запроса, получение и вычисление выражения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{output_8c_ac2dc442cf891a70da9743899a1c3fa6b}\label{output_8c_ac2dc442cf891a70da9743899a1c3fa6b} 
+\index{output.c@{output.c}!handle\_get\_request@{handle\_get\_request}}
+\index{handle\_get\_request@{handle\_get\_request}!output.c@{output.c}}
+\doxysubsubsection{\texorpdfstring{handle\_get\_request()}{handle\_get\_request()}}
+{\footnotesize\ttfamily void handle\+\_\+get\+\_\+request (\begin{DoxyParamCaption}\item[{struct mg\+\_\+connection \texorpdfstring{$\ast$}{*}}]{c }\end{DoxyParamCaption})}
+
+
+
+Обработка GET-\/запроса к серверу. 
+
+Функция генерирует JSON-\/ответ, содержащий\+:
+\begin{DoxyItemize}
+\item Статус и сообщение об успешной обработке.
+\item Текущую дату и время.
+\item Версию, автора и параметры конфигурации.
+\end{DoxyItemize}
+
+Используется структура {\ttfamily mg\+\_\+connection} из библиотеки Mongoose для отправки ответа клиенту.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Указатель на соединение Mongoose, по которому пришёл запрос.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Используется при обращении к {\ttfamily /api/get}. 
+\end{DoxyNote}
+\Hypertarget{output_8c_a631f283b1bfb4a3e77c7a5ab7962fed0}\label{output_8c_a631f283b1bfb4a3e77c7a5ab7962fed0} 
+\index{output.c@{output.c}!handle\_post\_request@{handle\_post\_request}}
+\index{handle\_post\_request@{handle\_post\_request}!output.c@{output.c}}
+\doxysubsubsection{\texorpdfstring{handle\_post\_request()}{handle\_post\_request()}}
+{\footnotesize\ttfamily void handle\+\_\+post\+\_\+request (\begin{DoxyParamCaption}\item[{struct mg\+\_\+connection \texorpdfstring{$\ast$}{*}}]{c,  }\item[{struct mg\+\_\+http\+\_\+message \texorpdfstring{$\ast$}{*}}]{hm }\end{DoxyParamCaption})}
+
+
+
+Обработка POST-\/запроса, получение и вычисление выражения. 
+
+
+\begin{DoxyItemize}
+\item Извлекает выражение из POST-\/запроса (например, {\ttfamily "{}2+2\texorpdfstring{$\ast$}{*}3"{}}).
+\item Вычисляет результат с помощью {\ttfamily \doxylink{calculator_8c_a9c963211521f085da15c5f9a3997fb6a}{calculate()}} из модуля {\ttfamily \doxylink{calculator_8h}{calculator.\+h}}.
+\item Подставляет выражение и результат в HTML-\/шаблон {\ttfamily Output\+Page.\+html}.
+\item Отправляет получившийся HTML обратно клиенту.
+\end{DoxyItemize}
+
+В случае ошибки загрузки шаблона возвращается HTTP-\/статус 500.
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Указатель на соединение Mongoose. \\
+\hline
+{\em hm} & Указатель на структуру {\ttfamily mg\+\_\+http\+\_\+message}, содержащую данные HTTP-\/запроса.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Используется при обращении к {\ttfamily /api/post}. 
+\end{DoxyNote}

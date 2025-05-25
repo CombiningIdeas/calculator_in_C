@@ -1,0 +1,63 @@
+\doxysection{backend/src/main.h File Reference}
+\hypertarget{main_8h}{}\label{main_8h}\index{backend/src/main.h@{backend/src/main.h}}
+
+
+Заголовочный файл с точкой входа и HTTP-\/обработчиком для сервера на базе Mongoose.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8h_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Главная функция, запускающая HTTP-\/сервер. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Заголовочный файл с точкой входа и HTTP-\/обработчиком для сервера на базе Mongoose. 
+
+Этот файл содержит объявления\+:
+\begin{DoxyItemize}
+\item Основной функции {\ttfamily \doxylink{main_8h_ae66f6b31b5ad750f1fe042a706a4e3d4}{main()}}, запускающей HTTP-\/сервер с помощью библиотеки Mongoose.
+\item Вспомогательной функции {\ttfamily ev\+\_\+handler()} — обработчика событий HTTP-\/запросов.
+\end{DoxyItemize}
+
+Программа инициализирует Mongoose, запускает сервер на порту {\ttfamily 7979} и обрабатывает HTTP-\/запросы\+:
+\begin{DoxyItemize}
+\item GET-\/запросы ({\ttfamily /api/get})
+\item POST-\/запросы ({\ttfamily /api/post})
+\item Отдача HTML-\/файлов ({\ttfamily /})
+\end{DoxyItemize}
+
+В случае некорректного маршрута клиенту возвращается ошибка 500.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{main_8c}{main.\+c} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8h_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8h_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{main.h@{main.h}!main@{main}}
+\index{main@{main}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Главная функция, запускающая HTTP-\/сервер. 
+
+В функции выполняется\+:
+\begin{DoxyItemize}
+\item Проверка корректности размеров числовых типов через тесты.
+\item Инициализация менеджера событий библиотеки Mongoose.
+\item Настройка HTTP-\/сервера и запуск его на порту 7979.
+\item Запуск бесконечного цикла обработки событий.
+\end{DoxyItemize}
+
+\begin{DoxyReturn}{Returns}
+Код завершения\+:
+\begin{DoxyItemize}
+\item {\ttfamily 0} — успешная работа.
+\item {\ttfamily 1} — ошибка при запуске тестов. 
+\end{DoxyItemize}
+\end{DoxyReturn}

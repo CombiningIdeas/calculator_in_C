@@ -1,0 +1,130 @@
+\doxysection{backend/src/calculator/calculator.c File Reference}
+\hypertarget{calculator_8c}{}\label{calculator_8c}\index{backend/src/calculator/calculator.c@{backend/src/calculator/calculator.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include "{}calculator.\+h"{}}\newline
+Include dependency graph for calculator.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{calculator_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+long double \mbox{\hyperlink{calculator_8c_aae179b3c6bba167d336fece0b4737a88}{parse\+\_\+number}} (const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}str)
+\begin{DoxyCompactList}\small\item\em Парсит и возвращает число (long double) из строки. \end{DoxyCompactList}\item 
+long double \mbox{\hyperlink{calculator_8c_aaed902af6c7911e2f5a6d6f76dea8ef1}{parse\+\_\+factor}} (const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}str)
+\begin{DoxyCompactList}\small\item\em Парсит один множитель\+: либо число, либо выражение в скобках. \end{DoxyCompactList}\item 
+long double \mbox{\hyperlink{calculator_8c_af1d4645a0a6f288f597f8cd3e11005aa}{parse\+\_\+partial\+\_\+expression}} (const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}str)
+\begin{DoxyCompactList}\small\item\em Парсит цепочку операций умножения и деления. \end{DoxyCompactList}\item 
+long double \mbox{\hyperlink{calculator_8c_acfc6682a3d951235c3fb63815b820cd0}{parse\+\_\+expression}} (const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}str)
+\begin{DoxyCompactList}\small\item\em Парсит полное выражение с учетом приоритетов операций. \end{DoxyCompactList}\item 
+long double \mbox{\hyperlink{calculator_8c_a9c963211521f085da15c5f9a3997fb6a}{calculate}} (const char \texorpdfstring{$\ast$}{*}input)
+\begin{DoxyCompactList}\small\item\em Главная функция вычисления выражения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{calculator_8c_a9c963211521f085da15c5f9a3997fb6a}\label{calculator_8c_a9c963211521f085da15c5f9a3997fb6a} 
+\index{calculator.c@{calculator.c}!calculate@{calculate}}
+\index{calculate@{calculate}!calculator.c@{calculator.c}}
+\doxysubsubsection{\texorpdfstring{calculate()}{calculate()}}
+{\footnotesize\ttfamily long double calculate (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{input }\end{DoxyParamCaption})}
+
+
+
+Главная функция вычисления выражения. 
+
+Принимает строку с арифметическим выражением, например {\ttfamily "{}3 + 5 \texorpdfstring{$\ast$}{*} (2 -\/ 1)"{}}, и возвращает вычисленный результат.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Строка с арифметическим выражением. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат вычисления выражения (тип {\ttfamily long double}). 
+\end{DoxyReturn}
+\Hypertarget{calculator_8c_acfc6682a3d951235c3fb63815b820cd0}\label{calculator_8c_acfc6682a3d951235c3fb63815b820cd0} 
+\index{calculator.c@{calculator.c}!parse\_expression@{parse\_expression}}
+\index{parse\_expression@{parse\_expression}!calculator.c@{calculator.c}}
+\doxysubsubsection{\texorpdfstring{parse\_expression()}{parse\_expression()}}
+{\footnotesize\ttfamily long double parse\+\_\+expression (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{str }\end{DoxyParamCaption})}
+
+
+
+Парсит полное выражение с учетом приоритетов операций. 
+
+Сначала вызывает {\ttfamily \doxylink{calculator_8h_af1d4645a0a6f288f597f8cd3e11005aa}{parse\+\_\+partial\+\_\+expression()}} (для {\ttfamily \texorpdfstring{$\ast$}{*}} и {\ttfamily /}), затем обрабатывает {\ttfamily +} и {\ttfamily -\/}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em str} & Указатель на текущую позицию в строке. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат вычисленного выражения. 
+\end{DoxyReturn}
+\Hypertarget{calculator_8c_aaed902af6c7911e2f5a6d6f76dea8ef1}\label{calculator_8c_aaed902af6c7911e2f5a6d6f76dea8ef1} 
+\index{calculator.c@{calculator.c}!parse\_factor@{parse\_factor}}
+\index{parse\_factor@{parse\_factor}!calculator.c@{calculator.c}}
+\doxysubsubsection{\texorpdfstring{parse\_factor()}{parse\_factor()}}
+{\footnotesize\ttfamily long double parse\+\_\+factor (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{str }\end{DoxyParamCaption})}
+
+
+
+Парсит один множитель\+: либо число, либо выражение в скобках. 
+
+Если текущий символ — `'(\textquotesingle{}{\ttfamily , вызывается рекурсивный разбор подвыражения. В противном случае вызывается}\doxylink{calculator_8h_aae179b3c6bba167d336fece0b4737a88}{parse\+\_\+number()}\`{}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em str} & Указатель на текущую позицию в строке. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Значение множителя. 
+\end{DoxyReturn}
+\Hypertarget{calculator_8c_aae179b3c6bba167d336fece0b4737a88}\label{calculator_8c_aae179b3c6bba167d336fece0b4737a88} 
+\index{calculator.c@{calculator.c}!parse\_number@{parse\_number}}
+\index{parse\_number@{parse\_number}!calculator.c@{calculator.c}}
+\doxysubsubsection{\texorpdfstring{parse\_number()}{parse\_number()}}
+{\footnotesize\ttfamily long double parse\+\_\+number (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{str }\end{DoxyParamCaption})}
+
+
+
+Парсит и возвращает число (long double) из строки. 
+
+Использует {\ttfamily sscanf()} для извлечения числа и смещает указатель в строке на количество считанных символов.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em str} & Указатель на строку. После вызова будет указывать на следующий символ. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Значение числа, считанного из строки. 
+\end{DoxyReturn}
+\Hypertarget{calculator_8c_af1d4645a0a6f288f597f8cd3e11005aa}\label{calculator_8c_af1d4645a0a6f288f597f8cd3e11005aa} 
+\index{calculator.c@{calculator.c}!parse\_partial\_expression@{parse\_partial\_expression}}
+\index{parse\_partial\_expression@{parse\_partial\_expression}!calculator.c@{calculator.c}}
+\doxysubsubsection{\texorpdfstring{parse\_partial\_expression()}{parse\_partial\_expression()}}
+{\footnotesize\ttfamily long double parse\+\_\+partial\+\_\+expression (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{str }\end{DoxyParamCaption})}
+
+
+
+Парсит цепочку операций умножения и деления. 
+
+Использует {\ttfamily \doxylink{calculator_8h_aaed902af6c7911e2f5a6d6f76dea8ef1}{parse\+\_\+factor()}} для получения первого значения, затем обрабатывает {\ttfamily \texorpdfstring{$\ast$}{*}} и {\ttfamily /} в приоритетном порядке.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em str} & Указатель на текущую позицию в строке. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Результат выражения с операциями {\ttfamily \texorpdfstring{$\ast$}{*}} и {\ttfamily /}. 
+\end{DoxyReturn}

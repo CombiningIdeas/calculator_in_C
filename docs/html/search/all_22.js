@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['часть_20выполняет_20вычисления_20обрабатывая_20post_20и_20get_20запросы_20от_20клиента_20br_0',['Проект представляет собой веб-калькулятор, реализованный на языке C с использованием библиотеки &lt;a href=&quot;https://github.com/cesanta/mongoose&quot; &gt;Mongoose&lt;/a&gt; для запуска веб-сервера. Интерфейс написан на HTML. Серверная часть выполняет вычисления, обрабатывая POST  и GET запросы от клиента. &lt;br/&gt;',['../index.html#autotoc_md3',1,'']]],
+  ['через_20средства_20автоматизации_20генерации_20документации_20на_20основе_20исходных_20текстов_20программ_20doxygen_3a_20ref_20home_20deadcode_20userfolder_20d_20educational_20projects_20op_20laboratory_20work_20laboratory_5fwork_5f3_20calculator_5fin_5fc_20docs_20docs_20md_20документация_1',['Ссылка на полную документацию в проекта через средства автоматизации генерации документации на основе исходных текстов программ - Doxygen: @ref &quot;/home/deadcode/UserFolder/D/educational projects/OP/laboratory work/laboratory_work_3/calculator_in_C/docs/docs.md&quot; &quot;Документация&quot;',['../index.html#autotoc_md4',1,'']]],
+  ['через_20doxygen_2',['Документация через Doxygen',['../md_docs_2docs.html',1,'']]]
+];

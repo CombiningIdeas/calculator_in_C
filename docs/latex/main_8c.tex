@@ -1,0 +1,48 @@
+\doxysection{backend/src/main.c File Reference}
+\hypertarget{main_8c}{}\label{main_8c}\index{backend/src/main.c@{backend/src/main.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include "{}../../mongoose/mongoose.\+h"{}}\newline
+{\ttfamily \#include "{}output/output.\+h"{}}\newline
+{\ttfamily \#include "{}../tests/test\+\_\+the\+\_\+size\+\_\+data\+\_\+type.\+h"{}}\newline
+Include dependency graph for main.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Главная функция, запускающая HTTP-\/сервер. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Главная функция, запускающая HTTP-\/сервер. 
+
+В функции выполняется\+:
+\begin{DoxyItemize}
+\item Проверка корректности размеров числовых типов через тесты.
+\item Инициализация менеджера событий библиотеки Mongoose.
+\item Настройка HTTP-\/сервера и запуск его на порту 7979.
+\item Запуск бесконечного цикла обработки событий.
+\end{DoxyItemize}
+
+\begin{DoxyReturn}{Returns}
+Код завершения\+:
+\begin{DoxyItemize}
+\item {\ttfamily 0} — успешная работа.
+\item {\ttfamily 1} — ошибка при запуске тестов. 
+\end{DoxyItemize}
+\end{DoxyReturn}
