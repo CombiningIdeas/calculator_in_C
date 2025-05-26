@@ -1,5 +1,13 @@
 # Calculator in C
 
+![LICENSE: GPLv2](https://img.shields.io/badge/LICENSE:-GPLv2-000080)
+![Version: 1.0](https://img.shields.io/badge/Version:-1.0-B50080)
+![Last Commit](https://img.shields.io/github/last-commit/CombiningIdeas/calculator_in_C)
+![Language](https://img.shields.io/badge/language-C-yellow)
+![Contributors](https://img.shields.io/github/contributors/CombiningIdeas/calculator_in_C)
+![Repo Size](https://img.shields.io/github/repo-size/CombiningIdeas/calculator_in_C)
+![Stars](https://img.shields.io/github/stars/CombiningIdeas/calculator_in_C?style=social)
+
 ### Проект представляет собой веб-калькулятор, реализованный на языке C с использованием библиотеки [Mongoose](https://github.com/cesanta/mongoose) для запуска веб-сервера. Интерфейс написан на HTML. Серверная часть выполняет вычисления, обрабатывая POST  и GET запросы от клиента. <br/>
 ### Ссылка на полную документацию в проекта через средства автоматизации генерации документации на основе исходных текстов программ - Doxygen: [Документация](docs/docs.md)
 
