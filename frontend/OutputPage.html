@@ -16,8 +16,7 @@
             color: #ff00ff;
             text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff; 
             background: linear-gradient(135deg,  #6005c1, #ae12d9, #eb0ce4);
-            background-size: 200% 200%;
-            animation: textGlow 5s ease-in-out infinite alternate, gradientShift 15s ease infinite; 
+            animation: textGlow 5s ease-in-out infinite alternate; 
         }
         
         @keyframes textGlow {
@@ -35,20 +34,6 @@
             }
         }
 
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-            
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
         .glow-header {
             display: flex;
             justify-content: center;
@@ -62,31 +47,26 @@
         .letter {
             display: inline-block;
             position: relative;
-            animation: explodeAndReturn 6s ease-in-out infinite;
+            animation: explodeAndReturn 12s ease-in-out infinite;
+            backface-visibility: hidden;
+            will-change: transform;
         }
 
         @keyframes explodeAndReturn {
             0% {
-                transform: translate(0, 0) rotate(0deg);
+                transform: translate3d(0, 0, 0) rotate(0deg);
                 opacity: 1;
             }
-            20% {
-                transform: translate(var(--x), var(--y)) rotate(var(--r));
+            20%, 40% {
+                transform: var(--x) rotate(var(--r));
                 opacity: 0.6;
             }
-            40% {
-                transform: translate(var(--x), var(--y)) rotate(var(--r));
-                opacity: 0.6;
-            }
-            60% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(0, 0) rotate(0deg);
+            60%, 100% {
+                transform: translate3d(0, 0, 0) rotate(0deg);
                 opacity: 1;
             }
         }
+
 
         input, button {
             width: 100%;
@@ -212,20 +192,32 @@
         const textElement = document.getElementById('exploding-text');
         const textContent = textElement.textContent.trim();
         textElement.innerHTML = '';
-        textContent.split('').forEach((char, index) => {
+        const allChars = textContent.split('');
+        let animateCount = allChars.length; 
+        if (navigator.hardwareConcurrency <= 2) {
+            animateCount = 2; 
+        } else if (navigator.hardwareConcurrency <= 4) {
+            animateCount = 6; 
+        } else if (navigator.hardwareConcurrency <= 6) {
+            animateCount = 8; 
+        }
+        allChars.forEach((char, index) => {
             const span = document.createElement('span');
             span.textContent = char;
             span.setAttribute('data-char', char);
-            span.classList.add('letter');
-            const angle = Math.random() * 2.5 * Math.PI;
-            const radius = Math.max(window.innerWidth, window.innerHeight);
-            const x = Math.cos(angle) * radius + 'px';
-            const y = Math.sin(angle) * radius + 'px';
-            const rotate = Math.floor(Math.random() * 720 - 360) + 'deg';
-            span.style.setProperty('--x', x);
-            span.style.setProperty('--y', y);
-            span.style.setProperty('--r', rotate);
-            span.style.animationDelay = `${index * 0.08}s`;
+            if (index < animateCount) {
+                span.classList.add('letter');
+                const angle = Math.random() * 2.5 * Math.PI;
+                const radius = Math.max(window.innerWidth, window.innerHeight);
+                const x = Math.cos(angle) * radius + 'px';
+                const y = Math.sin(angle) * radius + 'px';
+                const rotate = Math.floor(Math.random() * 720 - 360) + 'deg';
+                span.style.setProperty('--x', `translate3d(${x}, ${y}, 0)`);
+                span.style.setProperty('--r', rotate);
+                span.style.animationDelay = `${index * 0.08}s`;
+            } else {
+                span.style.opacity = '1';// Без анимации
+            }
             textElement.appendChild(span);
         });
     </script>
