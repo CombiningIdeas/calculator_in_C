@@ -1,3 +1,8 @@
+:root {
+  --button-bg: linear-gradient(90deg, #4b0082, #a106e8, #ff1493);
+  --button-bg-hover: linear-gradient(90deg, #0adbea, #e90b88, #8305be, #e654a2);
+}
+
 body {
     font-family: 'Arial', sans-serif;
     display: flex;
@@ -63,29 +68,23 @@ body {
 .letter {
     display: inline-block;
     position: relative;
-    animation: explodeAndReturn 6s ease-in-out infinite;
+    animation: explodeAndReturn 12s ease-in-out infinite;
+    backface-visibility: hidden;
+    will-change: transform;
 }
 
 /* Анимация: разлет → возврат → пауза */
 @keyframes explodeAndReturn {
     0% {
-        transform: translate(0, 0) rotate(0deg);
+        transform: translate3d(0, 0, 0) rotate(0deg);
         opacity: 1;
     }
-    20% {
-        transform: translate(var(--x), var(--y)) rotate(var(--r));
+    20%, 40% {/*Объядинили 20% и 40% - убрали между ними интерполяцию, снизили кол-во кадров, меньше расчетов*/
+        transform: var(--x) rotate(var(--r));
         opacity: 0.6;
     }
-    40% {
-        transform: translate(var(--x), var(--y)) rotate(var(--r));
-        opacity: 0.6;
-    }
-    60% {
-        transform: translate(0, 0) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(0, 0) rotate(0deg);
+    60%, 100% {/*Объядинили 60% и 100% - убрали между ними интерполяцию*/
+        transform: translate3d(0, 0, 0) rotate(0deg);
         opacity: 1;
     }
 }
@@ -115,15 +114,8 @@ input, button {
 
 /* Кнопка с фоном и белым текстом */
 button {
-    background: linear-gradient( /*это фон кнопки, до наведения курсора*/
-        90deg,
-        #4b0082 0%,
-        #4b0082 33.33%,
-        #a106e8 33.34%,
-        #a106e8 66.66%,
-        #ff1493 66.67%,
-        #ff1493 100%
-    );        
+     /*это фон кнопки, до наведения курсора*/
+    background: var(--button-bg);      
     background-size: 300% 100%;
     
     border: #d708de;                /* Убираем границу, чтобы она не перекрывала общий стиль */
@@ -136,15 +128,8 @@ button {
 
 /* задаёт изменение фона кнопки при наведении курсора мыши.*/
 button:hover {
-    background: linear-gradient( /*deg - это угол направления градиента*/
-        90deg,
-        #0adbea 0%,
-        #e90b88 33.33%,
-        #8305be 33.34%,
-        #8305be 66.66%,
-        #e654a2 66.67%,
-        #e654a2 100%
-    );
+     /*deg - это угол направления градиента*/
+    background: var(--button-bg-hover);
     background-size: 300% 100%;
 
     color: white;
@@ -179,7 +164,7 @@ body::before {
 /* Это id для тэга внутри которого наша кнопка, поэтому сама кнопка визуально не измениться*/
 /* Этот id нужен для того, чтобы наша кнопка была ниже других*/
 #fixed-bottom-form {
-    margin-top: 200px;   /* расстояние между предыдущим полем и этой кнопкой */
+    margin-top: 180px;   /* расстояние между предыдущим полем и этой кнопкой */
 }
 
 
