@@ -21,4 +21,4 @@ const int LENGTH_OF_FORMS_RESPONSE_AND_REQUEST = 512;
  * 
  * Используется в буфере `final_html` при генерации HTML-ответа пользователю.
  */
-const int LENGTH_OF_FINAL_HTML_PAGE_IN_BITES = 8192;
+const int LENGTH_OF_FINAL_HTML_PAGE_IN_BITES = 32768;
