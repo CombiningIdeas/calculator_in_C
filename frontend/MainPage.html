@@ -167,7 +167,8 @@
     <form id="calculator-form" action="http://127.0.0.1:7979/api/post" method="POST">
 
         <div class="input-row">
-            <input type="text" name="expression" placeholder="Введите выражениеe, например: 3*(5+5)-4/2" required>
+            <input id="expression-input" type="text" name="expression" 
+            placeholder="Введите выражениеe, например: 3*(5+5)-4/2" required>
         </div>
 
         <div class="input-row">
@@ -219,6 +220,103 @@
                 span.style.opacity = '1';// Без анимации
             }
             textElement.appendChild(span);
+        });
+
+        // Проверка на валидность: разрешены только цифры, пробелы, точки и круглые скобки
+        document.getElementById('calculator-form').addEventListener('submit', function(event) {
+            const input = document.querySelector('input[name="expression"]');
+            const expression = input.value.trim();
+            if (/[^0-9+\-*/().\s]/.test(expression)) {// Проверка недопустимых символов
+                alert('Ошибка: допустимы только цифры, пробелы, точки, круглые скобки и операторы + - * /');
+                event.preventDefault();
+                return;
+            }
+            const expr = expression.replace(/\s+/g, '');
+            let balance = 0;
+            for (const ch of expr) {
+                if (ch === '(') balance++;
+                else if (ch === ')') balance--;
+                if (balance < 0) {
+                    alert('Ошибка: закрывающая скобка без открывающей');
+                    event.preventDefault();
+                    return;
+                }
+            }
+            if (balance !== 0) {
+                alert('Ошибка: несбалансированные скобки');
+                event.preventDefault();
+                return;
+            }
+            const tokens = [];
+            const regex = /\d+(\.\d+)?|[+\-*/()]|./g;
+            let match;
+            while ((match = regex.exec(expr)) !== null) {
+                tokens.push(match[0]);
+            }
+            const isNumber = (t) => /^\d+(\.\d+)?$/.test(t);
+            const isOperator = (t) => /^[+\-*/]$/.test(t);
+            const isOpenPar = (t) => t === '(';
+            const isClosePar = (t) => t === ')';
+            for (let i = 0; i < tokens.length; i++) {
+                const token = tokens[i];
+                const prev = tokens[i - 1];
+                const next = tokens[i + 1];
+                if (isNumber(token)) {
+                    if (next && !(isOperator(next) || isClosePar(next))) {
+                        alert(`Ошибка: после числа '${token}' ожидается оператор или ')'`);
+                        event.preventDefault();
+                        return;
+                    }
+                } else if (isOperator(token)) {
+                    if (token === '-') {
+                        if (!(i === 0 || (prev && (isOperator(prev) || isOpenPar(prev))))) {
+                            if (!(next && (isNumber(next) || isOpenPar(next)))) {
+                                alert(`Ошибка: после оператора '${token}' должно быть число или '('`);
+                                event.preventDefault();
+                                return;
+                            }
+                        } else {
+                            if (!(next && (isNumber(next) || isOpenPar(next)))) {
+                                alert(`Ошибка: после унарного минуса должно быть число или '('`);
+                                event.preventDefault();
+                                return;
+                            }
+                        }
+                    } else {
+                        if (!(next && (isNumber(next) || isOpenPar(next)))) {
+                            alert(`Ошибка: после оператора '${token}' должно быть число или '('`);
+                            event.preventDefault();
+                            return;
+                        }
+                        if (!(prev && (isNumber(prev) || isClosePar(prev)))) {
+                            alert(`Ошибка: перед оператором '${token}' должно быть число или ')'`);
+                            event.preventDefault();
+                            return;
+                        }
+                    }
+                } else if (isOpenPar(token)) {
+                    if (!(next && (isNumber(next) || isOpenPar(next) || (next === '-' && (tokens[i+2] && (isNumber(tokens[i+2]) || isOpenPar(tokens[i+2]))))))) {
+                        alert(`Ошибка: после '(' должны быть унарный минус, число или '('`);
+                        event.preventDefault();
+                        return;
+                    }
+                } else if (isClosePar(token)) {
+                    if (next && !(isOperator(next) || isClosePar(next))) {
+                        alert(`Ошибка: после ')' ожидается оператор или ')'`);
+                        event.preventDefault();
+                        return;
+                    }
+                    if (!(prev && (isNumber(prev) || isClosePar(prev)))) {
+                        alert(`Ошибка: перед ')' должно быть число или ')'`);
+                        event.preventDefault();
+                        return;
+                    }
+                } else {
+                    alert(`Ошибка: недопустимый символ '${token}'`);
+                    event.preventDefault();
+                    return;
+                }
+            }
         });
     </script>
 
