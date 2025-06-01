@@ -30,9 +30,14 @@ $(TARGET): $(OBJ_MAIN)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 
-# Запуск
+# Запуск проекта
 run:
-	@HOST=127.0.0.1 PORT=8080 ./backend/build/package/main
+	@HOST=127.0.0.1 PORT=8080 bash -c '\
+	trap "echo Завершено; exit 0" SIGINT SIGTERM; \
+	./backend/build/package/main; \
+	exit_code=$$?; \
+	if [ $$exit_code -eq 143 ]; then exit 0; else exit $$exit_code; fi'
+
 
 # Очистка
 clean:
