@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <errno.h>
 
 // Подключение основной библиотеки Mongoose, содержащей сетевой стек и HTTP-функции:
@@ -56,13 +57,29 @@ int main() {
     struct mg_mgr mgr;  // Объявляем переменную типа mg_mgr — это менеджер событий Mongoose
 
     mg_mgr_init(&mgr);  // Инициализируем менеджер событий. Без этого сервер не сможет работать с событиями и соединениями.
+
+    // Получаем параметры из переменных окружения
+    const char *host = getenv("HOST");
+    const char *port = getenv("PORT");
+
+    char listen_addr[256];
+    snprintf(listen_addr, sizeof(listen_addr), "http://%s:%s", host, port);
   
     // Настраиваем HTTP-сервер, указывая адрес и порт для прослушивания — 0.0.0.0:7979
     // Это значит, что сервер будет доступен по локальной сети и даже из других сетей, если открыть порт
     // ev_handler — это функция, которая будет вызываться при приходе новых HTTP-запросов
-    mg_http_listen(&mgr, "http://0.0.0.0:7979", ev_handler, NULL);
-  
-    printf("Сервер запущен: http://localhost:7979 или же http://127.0.0.1:7979\n");
+    struct mg_connection *c = mg_http_listen(&mgr, listen_addr, ev_handler, NULL);
+    if (c == NULL) {
+        fprintf(stderr, "Не удалось запустить сервер на %s\n", listen_addr);
+        return 1;
+    }
+
+    printf("Сервер запущен: %s\n", listen_addr);
+
+    pid_t pid = getpid();
+    printf("Номер процесса, PID: %d\n", pid);
+    printf("Убить процесс: kill %d\n", pid);
+
 
     // Запускаем бесконечный цикл обработки событий — сервер будет работать, пока его не остановят вручную
     for (;;) {

@@ -1,7 +1,7 @@
 #include <time.h> // Для получения текущего времени (функция time())
 #include "output.h"
 #include "../calculator/calculator.h"
-#include "../../include/config.c"
+#include "../../configs/config.c"
 
 
 // Функция отправки JSON-сообщения с информацией о сервере
