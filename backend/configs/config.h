@@ -1,3 +1,6 @@
+#ifndef CONFIG
+#define CONFIG
+
 /**
  * @file config.c
  * @brief Конфигурационные параметры проекта.
@@ -6,14 +9,13 @@
  */
 
 
-
 /**
  * @brief Максимальная длина строки, передаваемой через HTML-форму.
  * 
  * Используется для хранения выражения пользователя и результата вычисления
  * в функциях обработки POST-запроса.
  */
-const int LENGTH_OF_FORMS_RESPONSE_AND_REQUEST = 512;
+#define LENGTH_OF_FORMS_RESPONSE_AND_REQUEST 1024
 
 
 /**
@@ -21,4 +23,15 @@ const int LENGTH_OF_FORMS_RESPONSE_AND_REQUEST = 512;
  * 
  * Используется в буфере `final_html` при генерации HTML-ответа пользователю.
  */
-const int LENGTH_OF_FINAL_HTML_PAGE_IN_BITES = 32768;
+#define LENGTH_OF_FINAL_HTML_PAGE_IN_BITES 32768
+
+
+/**
+ * @brief Максимально допустимая длина URL-адреса.
+ * 
+ * Используется при обработке HTTP-запросов для ограничения длины пути 
+ * и предотвращения переполнения буфера при парсинге URL.
+ */
+#define MAX_URL_LENGTH 128
+
+#endif
