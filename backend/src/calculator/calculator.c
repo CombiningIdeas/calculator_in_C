@@ -53,11 +53,12 @@ long double parse_partial_expression(const char **str) {
             (*str)++;              // То пропускаем символ '/'
             long double divisor = parse_factor(str); // В эту перменную парсим число или скобки(выражения в скобках), 
             // которые будем делить на тещуее число result
-            if (divisor != 0)      // Проверка деления на 0
+            if (divisor != 0) {    // Проверка деления на 0
                 result /= divisor; // Если не 0, то делим
-            else
+            }else {
                 division_by_zero_detected = 1;
                 return 0;          // деление на 0
+            }          
         } else {
             break;                 // Если никакой известной операции больше нет, то выходим из цикла
         }
