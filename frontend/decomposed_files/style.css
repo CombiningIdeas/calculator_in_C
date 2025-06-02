@@ -153,7 +153,7 @@ body::before {
     width: 100vw;
     height: 100vh;
 
-    background: url("https://raw.githubusercontent.com/rodrigograca31/rodrigograca31/master/matrix.svg") no-repeat center center;
+    background: url("background.svg") no-repeat center center;
     background-size: cover;
     opacity: 0.7; /* регулируй уровень прозрачности */
     
