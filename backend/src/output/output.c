@@ -62,10 +62,15 @@ void handle_post_request(struct mg_connection *c, struct mg_http_message *hm) {
   fclose(file);
 
   
-  // Подставляем данные в шаблон:
   char final_html[LENGTH_OF_FINAL_HTML_PAGE_IN_BITES]; // Итоговая HTML-страница
-  // snprintf заполняет final_html, подставляя переменные expression и result
-  snprintf(final_html, sizeof(final_html), template, expression, result); 
+
+  // Подставляем данные в шаблон:
+  if (division_by_zero_detected != 1) {
+    snprintf(final_html, sizeof(final_html), template, expression, result); 
+  } else {
+    snprintf(final_html, sizeof(final_html), template, expression, 
+      "Ошибка: в выражении присутствует деление на 0!");
+  }
 
   mg_http_reply(c, 200, "Content-Type: text/html\r\n", "%s", final_html);
 

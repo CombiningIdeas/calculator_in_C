@@ -4,6 +4,8 @@
 #include "calculator.h" 
 
 
+int division_by_zero_detected = 0; 
+
 // Парсит число из строки
 long double parse_number(const char **str) {
     long double result = 0;
@@ -54,6 +56,7 @@ long double parse_partial_expression(const char **str) {
             if (divisor != 0)      // Проверка деления на 0
                 result /= divisor; // Если не 0, то делим
             else
+                division_by_zero_detected = 1;
                 return 0;          // деление на 0
         } else {
             break;                 // Если никакой известной операции больше нет, то выходим из цикла
@@ -90,6 +93,7 @@ long double parse_expression(const char **str) {
 
 // Главная функция, которая переводит строковое выражение, вычисляяя результат 
 long double calculate(const char *input) {
+    division_by_zero_detected = 0; // сбрасываем флаг
     const char *ptr = input;
     return parse_expression(&ptr); 
 }
