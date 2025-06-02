@@ -74,13 +74,13 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">calculator.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;ctype.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="calculator_8h_source.html">calculator.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -88,17 +88,15 @@ Include dependency graph for calculator.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="calculator_8c__incl.png" border="0" usemap="#abackend_2src_2calculator_2calculator_8c" alt=""/></div>
 <map name="abackend_2src_2calculator_2calculator_8c" id="abackend_2src_2calculator_2calculator_8c">
-<area shape="rect" title=" " alt="" coords="143,5,310,45"/>
+<area shape="rect" title=" " alt="" coords="95,5,262,45"/>
 <area shape="rect" title=" " alt="" coords="5,93,72,119"/>
-<area shape="poly" title=" " alt="" coords="183,48,80,90,78,85,181,43"/>
+<area shape="poly" title=" " alt="" coords="146,48,73,89,70,84,144,43"/>
 <area shape="rect" title=" " alt="" coords="97,93,167,119"/>
-<area shape="poly" title=" " alt="" coords="205,48,159,86,155,82,202,43"/>
+<area shape="poly" title=" " alt="" coords="170,47,148,83,144,80,165,44"/>
 <area shape="rect" title=" " alt="" coords="191,93,262,119"/>
-<area shape="poly" title=" " alt="" coords="229,46,229,79,224,79,224,46"/>
-<area shape="rect" title=" " alt="" coords="286,93,357,119"/>
-<area shape="poly" title=" " alt="" coords="251,43,298,82,295,86,248,48"/>
-<area shape="rect" href="calculator_8h.html" title="Заголовочный файл арифметического парсера выражений." alt="" coords="381,93,478,119"/>
-<area shape="poly" title=" " alt="" coords="276,43,388,86,386,91,274,48"/>
+<area shape="poly" title=" " alt="" coords="193,44,215,80,210,83,188,47"/>
+<area shape="rect" href="calculator_8h.html" title="Заголовочный файл арифметического парсера выражений." alt="" coords="286,93,383,119"/>
+<area shape="poly" title=" " alt="" coords="217,43,301,85,298,89,215,48"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -119,6 +117,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a9c963211521f085da15c5f9a3997fb6a" id="r_a9c963211521f085da15c5f9a3997fb6a"><td class="memItemLeft" align="right" valign="top">long double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="calculator_8c.html#a9c963211521f085da15c5f9a3997fb6a">calculate</a> (const char *input)</td></tr>
 <tr class="memdesc:a9c963211521f085da15c5f9a3997fb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Главная функция вычисления выражения.  <br /></td></tr>
 <tr class="separator:a9c963211521f085da15c5f9a3997fb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:acba6b97fd1f0544fdc4fbf83fa917e8f" id="r_acba6b97fd1f0544fdc4fbf83fa917e8f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="calculator_8c.html#acba6b97fd1f0544fdc4fbf83fa917e8f">division_by_zero_detected</a> = 0</td></tr>
+<tr class="memdesc:acba6b97fd1f0544fdc4fbf83fa917e8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Глобальный флаг, указывающий на попытку деления на ноль.  <br /></td></tr>
+<tr class="separator:acba6b97fd1f0544fdc4fbf83fa917e8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a9c963211521f085da15c5f9a3997fb6a" name="a9c963211521f085da15c5f9a3997fb6a"></a>
@@ -258,6 +262,26 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Результат выражения с операциями <code>*</code> и <code>/</code>. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="acba6b97fd1f0544fdc4fbf83fa917e8f" name="acba6b97fd1f0544fdc4fbf83fa917e8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba6b97fd1f0544fdc4fbf83fa917e8f">&#9670;&#160;</a></span>division_by_zero_detected</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int division_by_zero_detected = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Глобальный флаг, указывающий на попытку деления на ноль. </p>
+<p>Используется в процессе вычисления арифметического выражения для сигнализации об ошибке деления на 0. Устанавливается в <code>1</code>, если в выражении встречается деление на 0 (в том числе в скобках), и сбрасывается в <code>0</code> перед каждым вызовом функции <code><a class="el" href="calculator_8h.html#a9c963211521f085da15c5f9a3997fb6a" title="Главная функция вычисления выражения.">calculate()</a></code>.</p>
+<dl class="section note"><dt>Note</dt><dd>Значение флага должно проверяться только после вызова <code><a class="el" href="calculator_8h.html#a9c963211521f085da15c5f9a3997fb6a" title="Главная функция вычисления выражения.">calculate()</a></code>.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="calculator_8h.html#a9c963211521f085da15c5f9a3997fb6a" title="Главная функция вычисления выражения.">calculate()</a> </dd></dl>
 
 </div>
 </div>

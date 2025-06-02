@@ -72,7 +72,7 @@ $(function() {
   <div class="headertitle"><div class="title">Calculator in C </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> </p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <img src="https://img.shields.io/badge/LICENSE:-GPLv2-000080" alt="LICENSE: GPLv2" class="inline"/> <img src="https://img.shields.io/badge/Version:-1.0-B50080" alt="Version: 1.0" class="inline"/> <img src="https://img.shields.io/github/last-commit/CombiningIdeas/calculator_in_C" alt="Last Commit" class="inline"/> <img src="https://img.shields.io/badge/language-C-yellow" alt="Language" class="inline"/> <img src="https://img.shields.io/github/contributors/CombiningIdeas/calculator_in_C" alt="Contributors" class="inline"/> <img src="https://img.shields.io/github/repo-size/CombiningIdeas/calculator_in_C" alt="Repo Size" class="inline"/> <img src="https://img.shields.io/github/stars/CombiningIdeas/calculator_in_C?style=social" alt="Stars" class="inline"/></p>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Проект представляет собой веб-калькулятор, реализованный на языке C с использованием библиотеки &lt;a href="https://github.com/cesanta/mongoose" &gt;Mongoose&lt;/a&gt; для запуска веб-сервера. Интерфейс написан на HTML. Серверная часть выполняет вычисления, обрабатывая POST  и GET запросы от клиента. &lt;br/&gt;</h2>
 <h2><a class="anchor" id="autotoc_md4"></a>
@@ -95,6 +95,9 @@ $(function() {
 <div class="line">│   │── build/ </div>
 <div class="line">│   │   │── package/</div>
 <div class="line">│   │   │   │── main</div>
+<div class="line">│   │── configs/ </div>
+<div class="line">│   │   │── config.env</div>
+<div class="line">│   │   │── config.h</div>
 <div class="line">│   │── src/</div>
 <div class="line">│   │   │── calculator/</div>
 <div class="line">│   │   │   │── calculator.c</div>
@@ -103,11 +106,18 @@ $(function() {
 <div class="line">│   │   │   │── output.c</div>
 <div class="line">│   │   │   │── output.h</div>
 <div class="line">│   │   │── main.c</div>
-<div class="line">│   │   │── main.h  </div>
+<div class="line">│   │   │── main.h</div>
+<div class="line">│   │── tests/</div>
+<div class="line">│   │   │── test_the_size_data_type.c</div>
+<div class="line">│   │   │── test_the_size_data_type.h</div>
 <div class="line">│── docs/</div>
-<div class="line">│   │── ...</div>
+<div class="line">│   │── html/</div>
+<div class="line">│   │── latex/</div>
+<div class="line">│   │── docs.md</div>
 <div class="line">│── frontend/</div>
 <div class="line">│   │── decomposed_files/</div>
+<div class="line">│   │   │── advertising_integration.html</div>
+<div class="line">│   │   │── background.svg</div>
 <div class="line">│   │   │── index.html</div>
 <div class="line">│   │   │── style.css</div>
 <div class="line">│   │   │── script.js</div>
@@ -118,48 +128,35 @@ $(function() {
 <div class="line">│   │── mogoose.h</div>
 <div class="line">│   │── LICENSE</div>
 <div class="line">│   │── README.md</div>
-<div class="line">│   │── ...</div>
 <div class="line">│── .gitignore</div>
-<div class="line">│── Makefile</div>
-<div class="line">│── LICENSE.md</div>
-<div class="line">│── README.md</div>
 <div class="line">│── Doxygen</div>
+<div class="line">│── LICENSE.md</div>
+<div class="line">│── Makefile</div>
+<div class="line">│── README.md</div>
 </div><!-- fragment --><hr  />
 <h1><a class="anchor" id="autotoc_md9"></a>
 ⚙️ Сборка проекта</h1>
-<p>Для сборки сервера:</p>
-<h2><a class="anchor" id="autotoc_md10"></a>
-🔨 1. Сборка с помощью make</h2>
-<p>Проект поддерживает автоматическую сборку через Makefile. </p><div class="fragment"><div class="line">make</div>
-</div><!-- fragment --><p>Эта команда:</p>
-<ul>
-<li>скомпилирует .c-файлы в .o-файлы;</li>
-<li>соберёт исполняемый файл main по пути: backend/build/package/main</li>
-</ul>
-<p>Можно собрать напрямую в консоли указывая все файлы:</p>
-<div class="fragment"><div class="line">gcc backend/src/main.c \</div>
-<div class="line">    backend/src/output/output.c \</div>
-<div class="line">    backend/src/calculator/calculator.c \</div>
-<div class="line">    mongoose/mongoose.c \</div>
-<div class="line">    -o backend/build/package/main</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md11"></a>
+<p>Для сборки сервера будет использоваться Makefile. Но тут так же будут указана часть команд, которые можно вручную написать в консоль для изменения каких-либо параметров.<br  />
+ К примеру установить хост и порт можно через консоль: </p><div class="fragment"><div class="line">export HOST=... PORT=...</div>
+</div><!-- fragment --><p>Проверить их так же можно через консоль: </p><div class="fragment"><div class="line">echo $HOST $PORT</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
+Сборка, пересборка, запуск и очистка проекта с помощью make-команд:</h2>
+<h2><a class="anchor" id="autotoc_md11"></a>
+🔨 1. Сборка проекта</h2>
+<p>Сборка проекта: </p><div class="fragment"><div class="line">make</div>
+</div><!-- fragment --><p> Эта команда скомпилирует .c-файлы в .o-файлы;</p>
+<h2><a class="anchor" id="autotoc_md12"></a>
 🧹 2. Очистка проекта</h2>
-<p>Для удаления всех объектных файлов: </p><div class="fragment"><div class="line">make clean</div>
-</div><!-- fragment --><p>Для полной очистки (включая финальный main): </p><div class="fragment"><div class="line">make all-clean</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md12"></a>
-🔁 3. Перекомпиляция</h2>
-<p>Для удаления старого main и повторной сборки: </p><div class="fragment"><div class="line">make rebuild</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
-🚀 Запуск сервера</h1>
-<p>Можно такой командой:</p>
-<div class="fragment"><div class="line">./backend/build/package/main</div>
-</div><!-- fragment --><p>Или такой командой:</p>
-<div class="fragment"><div class="line">backend/build/package/main</div>
-</div><!-- fragment --><p>После запуска сервер будет доступен по адресу:</p>
-<div class="fragment"><div class="line">http://localhost:7979</div>
-<div class="line">или</div>
-<div class="line">http://127.0.0.1:7979</div>
+<p>Удаления всех объектных файлов, кроме скомпилированного .o-файла: </p><div class="fragment"><div class="line">make clean</div>
+</div><!-- fragment --><p>Для полной очистки (включая финальный .o-файл): </p><div class="fragment"><div class="line">make all-clean</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
+🔁 3. Перекомпиляция проекта</h2>
+<p>Для удаления старого и создания нового итогового .o-файл: </p><div class="fragment"><div class="line">make rebuild</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md14"></a>
+🚀 Запуск проекта</h1>
+<p>Запуск проекта(сервера):</p>
+<div class="fragment"><div class="line">make run</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md15"></a>
 💡 Дополнительно</h1>
 <ul>
 <li>Серверная часть обрабатывает математические выражения, переданные из формы на index.html, и возвращает результат пользователю.</li>
@@ -171,18 +168,18 @@ $(function() {
  Для отключения документирования папки mongoose в файле Doxygen мы написали в одном флаге следующее значение: <div class="fragment"><div class="line">EXCLUDE = mongoose/</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md16"></a>
 🔧 Зависимости</h1>
 <ul>
 <li>Компилятор gcc</li>
 <li>Библиотека mongoose.c (в папке mongoose/)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md16"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 📌 Автор</h1>
 <ul>
 <li>Этот проект был разработан в учебных целях Иваном Широких.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 📄 Лицензия</h1>
 <p>Этот проект распространяется под лицензией <b>GNU General Public License v2.0</b>.</p>
 <p>Вы можете свободно использовать, изменять и распространять данный код, при условии соблюдения условий GPL. Проект предоставляется "как есть", без каких-либо гарантий.</p>

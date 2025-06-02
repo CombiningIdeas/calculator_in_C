@@ -25,6 +25,11 @@ long double \mbox{\hyperlink{calculator_8h_acfc6682a3d951235c3fb63815b820cd0}{pa
 \begin{DoxyCompactList}\small\item\em Парсит полное выражение с учетом приоритетов операций. \end{DoxyCompactList}\item 
 long double \mbox{\hyperlink{calculator_8h_a9c963211521f085da15c5f9a3997fb6a}{calculate}} (const char \texorpdfstring{$\ast$}{*}input)
 \begin{DoxyCompactList}\small\item\em Главная функция вычисления выражения. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{calculator_8h_acba6b97fd1f0544fdc4fbf83fa917e8f}{division\+\_\+by\+\_\+zero\+\_\+detected}}
+\begin{DoxyCompactList}\small\item\em Глобальный флаг, указывающий на попытку деления на ноль. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -142,3 +147,24 @@ long double \mbox{\hyperlink{calculator_8h_a9c963211521f085da15c5f9a3997fb6a}{ca
 \begin{DoxyReturn}{Returns}
 Результат выражения с операциями {\ttfamily \texorpdfstring{$\ast$}{*}} и {\ttfamily /}. 
 \end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{calculator_8h_acba6b97fd1f0544fdc4fbf83fa917e8f}\label{calculator_8h_acba6b97fd1f0544fdc4fbf83fa917e8f} 
+\index{calculator.h@{calculator.h}!division\_by\_zero\_detected@{division\_by\_zero\_detected}}
+\index{division\_by\_zero\_detected@{division\_by\_zero\_detected}!calculator.h@{calculator.h}}
+\doxysubsubsection{\texorpdfstring{division\_by\_zero\_detected}{division\_by\_zero\_detected}}
+{\footnotesize\ttfamily int division\+\_\+by\+\_\+zero\+\_\+detected\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Глобальный флаг, указывающий на попытку деления на ноль. 
+
+Используется в процессе вычисления арифметического выражения для сигнализации об ошибке деления на 0. Устанавливается в {\ttfamily 1}, если в выражении встречается деление на 0 (в том числе в скобках), и сбрасывается в {\ttfamily 0} перед каждым вызовом функции {\ttfamily \doxylink{calculator_8h_a9c963211521f085da15c5f9a3997fb6a}{calculate()}}.
+
+\begin{DoxyNote}{Note}
+Значение флага должно проверяться только после вызова {\ttfamily \doxylink{calculator_8h_a9c963211521f085da15c5f9a3997fb6a}{calculate()}}.
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\doxylink{calculator_8h_a9c963211521f085da15c5f9a3997fb6a}{calculate()} 
+\end{DoxySeeAlso}

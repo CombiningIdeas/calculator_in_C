@@ -1,0 +1,53 @@
+\doxysection{backend/configs/config.h File Reference}
+\hypertarget{config_8h}{}\label{config_8h}\index{backend/configs/config.h@{backend/configs/config.h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{config_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{config_8h_a1490070a9e7abc1c0a9fec3f5b65b74a}{LENGTH\+\_\+\+OF\+\_\+\+FORMS\+\_\+\+RESPONSE\+\_\+\+AND\+\_\+\+REQUEST}}~1024
+\begin{DoxyCompactList}\small\item\em Максимальная длина строки, передаваемой через HTML-\/форму. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{config_8h_afedac7d20d5c35ea052cca9fc3298cca}{LENGTH\+\_\+\+OF\+\_\+\+FINAL\+\_\+\+HTML\+\_\+\+PAGE\+\_\+\+IN\+\_\+\+BITES}}~32768
+\begin{DoxyCompactList}\small\item\em Максимальный размер итоговой HTML-\/страницы (в битах). \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{config_8h_a3a0a3a9d3952e2b57333ed6daceb163e}{MAX\+\_\+\+URL\+\_\+\+LENGTH}}~128
+\begin{DoxyCompactList}\small\item\em Максимально допустимая длина URL-\/адреса. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{config_8h_afedac7d20d5c35ea052cca9fc3298cca}\label{config_8h_afedac7d20d5c35ea052cca9fc3298cca} 
+\index{config.h@{config.h}!LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES@{LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES}}
+\index{LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES@{LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES}!config.h@{config.h}}
+\doxysubsubsection{\texorpdfstring{LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES}{LENGTH\_OF\_FINAL\_HTML\_PAGE\_IN\_BITES}}
+{\footnotesize\ttfamily \#define LENGTH\+\_\+\+OF\+\_\+\+FINAL\+\_\+\+HTML\+\_\+\+PAGE\+\_\+\+IN\+\_\+\+BITES~32768}
+
+
+
+Максимальный размер итоговой HTML-\/страницы (в битах). 
+
+Используется в буфере {\ttfamily final\+\_\+html} при генерации HTML-\/ответа пользователю. \Hypertarget{config_8h_a1490070a9e7abc1c0a9fec3f5b65b74a}\label{config_8h_a1490070a9e7abc1c0a9fec3f5b65b74a} 
+\index{config.h@{config.h}!LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST@{LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST}}
+\index{LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST@{LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST}!config.h@{config.h}}
+\doxysubsubsection{\texorpdfstring{LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST}{LENGTH\_OF\_FORMS\_RESPONSE\_AND\_REQUEST}}
+{\footnotesize\ttfamily \#define LENGTH\+\_\+\+OF\+\_\+\+FORMS\+\_\+\+RESPONSE\+\_\+\+AND\+\_\+\+REQUEST~1024}
+
+
+
+Максимальная длина строки, передаваемой через HTML-\/форму. 
+
+Используется для хранения выражения пользователя и результата вычисления в функциях обработки POST-\/запроса. \Hypertarget{config_8h_a3a0a3a9d3952e2b57333ed6daceb163e}\label{config_8h_a3a0a3a9d3952e2b57333ed6daceb163e} 
+\index{config.h@{config.h}!MAX\_URL\_LENGTH@{MAX\_URL\_LENGTH}}
+\index{MAX\_URL\_LENGTH@{MAX\_URL\_LENGTH}!config.h@{config.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_URL\_LENGTH}{MAX\_URL\_LENGTH}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+URL\+\_\+\+LENGTH~128}
+
+
+
+Максимально допустимая длина URL-\/адреса. 
+
+Используется при обработке HTTP-\/запросов для ограничения длины пути и предотвращения переполнения буфера при парсинге URL. 
