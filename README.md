@@ -1,4 +1,4 @@
-# Calculator in C
+# Calculator in C 
 
 ![LICENSE: GPLv2](https://img.shields.io/badge/LICENSE:-GPLv2-000080)
 ![Version: 1.0](https://img.shields.io/badge/Version:-1.0-B50080)
